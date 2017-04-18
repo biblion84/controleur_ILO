@@ -1,0 +1,56 @@
+extends layout.pug
+
+block content
+    div(id='date')
+    div.
+        Ip du serveur distant : #{ip_serveur}
+    div(id='etatServeur')
+
+    label.
+        Dans combien de minutes voulez vous eteindre le serveur ?
+    input(id='time' placeholder="temps" type="number")
+    input(id='password' type="password" placeholder="Password")
+    button(onclick='socket.emit("shutdown", {"temps" :document.getElementById("time").value, "pass": document.getElementById("password").value})').
+            Eteindre le serveur
+    button(onclick='socket.emit("startup", {"pass": document.getElementById("password").value})').
+            Allumer
+    button(onclick='socket.emit("bloque", {"bloque" :true, "pass": document.getElementById("password").value})').
+            bloque extinction automatique serveur
+    button(onclick='socket.emit("bloque", {"bloque" :false, "pass": document.getElementById("password").value})').
+            autoriser extinction automatique serveur
+    div(id='commande')
+
+block script
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js', type='text/javascript')
+
+
+    script.
+        var socket = io.connect('http://#{ip_serveur}:#{port}');
+
+        socket.on('welcome', function (data) {
+        document.getElementById("texte").innerText = data;
+        });
+        socket.on('serveurState', function (data){
+            let etat = document.getElementById("etatServeur");
+            console.log(data);
+            if (data){
+                etat.innerText = "Serveur allumé";
+                etat.style.backgroundColor = "green";
+            } else {
+                etat.innerText = "Serveur eteint";
+                etat.style.backgroundColor = "red";
+            }
+        });
+        socket.on('time', function(data){
+            document.getElementById("date").innerText = data;
+        });
+        socket.on("commandeOK", function(data){
+            if (data){
+                document.getElementById("commande").innerText = "Commande executée " + new Date();
+                document.getElementById("commande").style.backgroundColor = "green";
+
+            } else {
+                document.getElementById("commande").innerText = "Commande échoué " + new Date();
+                document.getElementById("commande").style.backgroundColor = "red";
+            }
+        });
