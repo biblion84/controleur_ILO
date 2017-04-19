@@ -7,10 +7,11 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bcrypt = require('bcrypt');
-const Commande = require('./public/script/command');
-const StatusServeur = require('./public/script/StatusServeur');
+const Commande = require('./modules/command');
+const StatusServeur = require('./modules/StatusServeur');
+// import {StatusServeur} from './public/script/StatusServeur'; Don't work
 const statusServeur =  new StatusServeur();
-statusServeur.maxMinuteSrv = 3;
+statusServeur.maxMinuteSrv = CONF.ilo.maxMinute;
 const spoolerSSH = require('./SpoolerCommand');
 spoolerSSH.start();
 

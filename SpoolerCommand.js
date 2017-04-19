@@ -3,7 +3,7 @@
  */
 const connection = require('./connection');
 
-const Commande = require('./public/script/command');
+const Commande = require('./modules/command');
 var listCommand = [];
 var spoolerSSH = {
     addCommand: function (commande, callback) {

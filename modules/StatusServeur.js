@@ -48,3 +48,5 @@ class StatusServeur{
         socket.emit("serveurState", this);
     }
 }
+
+module.exports = StatusServeur;

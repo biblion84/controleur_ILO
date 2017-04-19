@@ -25,3 +25,4 @@ class Commande{
     }
 }
 
+module.exports = Commande;
