@@ -34,7 +34,7 @@ function sendCommand(command, callback){
                 hmac: ['hmac-sha1'],
                 cipher: ['aes128-cbc']
             },
-            timeout: 1000 * 59
+            timeout: 1000 * 1000
         });
     } catch (err){
         console.log(err);

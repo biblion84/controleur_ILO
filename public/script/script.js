@@ -17,7 +17,8 @@ socket.on('serveurState', function (data) {
         macaron.style.backgroundColor = "green";
         button.innerText = "shutdown";
         button.onclick = () => {
-            new Commande("shutdown", document.getElementById('password').value).send(socket);
+            new Commande("shutdown", document.getElementById('password').value, false,
+            document.getElementById('temps').value).send(socket);
         }
     } else {
         texte.innerText = "Serveur eteint";

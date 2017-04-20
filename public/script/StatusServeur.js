@@ -20,6 +20,16 @@ class StatusServeur{
         this.isInstanceOfStatusServeur = true;
     }
 
+    construire(commande){
+        if (commande.isInstanceOfStatusServeur){
+            this.connected = commande.connected;
+            this.isIloUp = commande.isIloUp;
+            this.minuteConnection = commande.minuteConnection;
+            this.extinctionAutomatiqueBloque = commande.extinctionAutomatiqueBloque;
+            this.maxMinuteSrv = commande.maxMinuteSrv;
+        }
+    }
+
 //TODO tester set
     set(attribut, valeur, emitter){
         switch (attribut){ //TRES TRES SALE dsl

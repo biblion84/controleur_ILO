@@ -104,15 +104,17 @@ io.on("connection", function (socket) {
 
         bcrypt.compare(commande.pass, CONF.controleur.pass, function(err, res) {
             if (res && statusServeur.isIloUp) {
-                statusServeur.set("extinctionAutomatiqueBloque", true, eventEmitter);
                 // statusServeur.extinctionAutomatiqueBloque = true; //On empeche le serveur de s'eteindre avant les minutes donnees
                 setTimeout(() => {
-                    spoolerSSH.addCommand("power off", () => {
-                        statusServeur.set("extinctionAutomatiqueBloque", false, eventEmitter);
-                            // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
-                    })
+                    if (!statusServeur.extinctionAutomatiqueBloque) {
+                        console.log("extinction du serveur a " + new Date() + temps + "minutes");
+                        spoolerSSH.addCommand("power off", () => {
+                            statusServeur.set("extinctionAutomatiqueBloque", false, eventEmitter);
+                                // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
+                        })
+                    }
                 }, commande.temps * 1000 * 60 + 1000);
-                console.log("extinction du serveur a " + new Date());
+
                 commande.execute = true;
             } else if (!res){
                 commande.failReason += " Mauvais Mot de passe";
