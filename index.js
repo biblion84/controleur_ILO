@@ -58,19 +58,13 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        ip_serveur: CONF.controleur.ip,
-        port: CONF.controleur.port
-    });
-    console.log("index servi");
-});
-app.get('/dashboard', (req, res) => {
     res.render('dashboard', {
         ip_serveur: CONF.controleur.ip,
         port: CONF.controleur.port
     });
     console.log("dashboard servi");
 });
+
 ///</views PUG>
 
 

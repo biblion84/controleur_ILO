@@ -1,4 +1,4 @@
-var socket = io.connect('{ip_serveur}:#{port}'); 
+var socket = io.connect('#{ip_serveur}:#{port}');
 socket.on('welcome', function (data) {
     document.getElementById("texte").innerText = data;
 });
