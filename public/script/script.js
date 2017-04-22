@@ -6,7 +6,7 @@ socket.on('welcome', function (data) {
 
 socket.on('serveurState', function (data) {
     let serveurState = new StatusServeur(data);
-    console.log(serveurState);
+    // console.log(serveurState);
 
     let etat = document.getElementById("etatServeur");
     let macaron = etat.childNodes[0];
@@ -86,7 +86,7 @@ setInterval(function () {
 
 socket.on("retour", function (data) {
     let commande = new Commande(data);
-    console.log(commande);
+    // console.log(commande);
     let table = document.getElementById("tableCommande");
     let tr = document.createElement("tr");
     let td = document.createElement("td");
@@ -114,5 +114,5 @@ socket.on("retour", function (data) {
 function envoyer (){
     let commande = n;
     commande.send(socket);
-    console.log("requete envoye");
+    // console.log("requete envoye");
 }
