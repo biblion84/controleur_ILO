@@ -1,13 +1,13 @@
 {
   "controleur":{
     "port": 3000,
-    "ip" : "192.168.1.45",
-    "pass": "$2a$10$1uaZBrlsgfdgfsdgfsdY.ujH3N7NIHznV4BqhFjw5ajM.BokZoFa"
+    "ip" : "http://192.168.1.45",
+    "pass": "$2a$10$1uaZBrlGnfK3mopnvFR4Y.ujH3N7NIHznV4BqhFjw5ajM.BokZoFa"
   },
   "ilo":{
     "host": "192.168.1.54",
-    "user": "userIlo",
-    "pass": "password",
+    "user": "lucas",
+    "pass": "luludes",
     "maxMinute": "15"
   }
 }
