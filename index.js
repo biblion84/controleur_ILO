@@ -62,7 +62,7 @@ app.get('/', (req, res) => {
         ip_serveur: CONF.controleur.ip,
         port: CONF.controleur.port
     });
-    console.log("dashboard servi");
+
 });
 
 ///</views PUG>
@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
 
 io.on("connection", function (socket) {
     statusServeur.connected += 1;
-    console.log("connexion de " + socket.handshake.ip);
+    // console.log("connexion de " + socket.handshake.ip);
     socket.emit("serveurState", statusServeur);
 
     eventEmitter.on("change", () => {
@@ -101,7 +101,7 @@ io.on("connection", function (socket) {
                 // statusServeur.extinctionAutomatiqueBloque = true; //On empeche le serveur de s'eteindre avant les minutes donnees
                 setTimeout(() => {
                     if (!statusServeur.extinctionAutomatiqueBloque) {
-                        console.log("extinction du serveur a " + new Date() + temps + "minutes");
+                        // console.log("extinction du serveur a " + new Date() + temps + "minutes");
                         spoolerSSH.addCommand("power off", () => {
                             statusServeur.set("extinctionAutomatiqueBloque", false, eventEmitter);
                                 // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
@@ -126,7 +126,7 @@ io.on("connection", function (socket) {
                 setTimeout(() => {
                     spoolerSSH.addCommand("power on")
                 }, 1000);
-                console.log("allumage du serveur a " + new Date());
+                // console.log("allumage du serveur a " + new Date());
                 commande.execute = true;
                 statusServeur.send(socket);
             } else if (!res){
@@ -139,8 +139,8 @@ io.on("connection", function (socket) {
     });
 
     socket.on("bloque", (data) => {
-        console.log("recu");
-        console.log(data);
+        // console.log("recu");
+        // console.log(data);
         let commande = new Commande(data);
         bcrypt.compare(commande.pass, CONF.controleur.pass, function(err, res) {
             if(res){
@@ -155,7 +155,7 @@ io.on("connection", function (socket) {
 
     socket.on('disconnect', function () {
         statusServeur.connected -= 1;
-        console.log("deconnexion de " + socket.handshake.ip);
+        // console.log("deconnexion de " + socket.handshake.ip);
     });
 
 });

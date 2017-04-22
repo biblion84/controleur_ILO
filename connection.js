@@ -12,17 +12,17 @@ function sendCommand(command, callback){
         conn.on('ready', function () {
             conn.exec(command, function (err, stream) {
                 if (err) {
-                    console.log("il y a eu une erreur \n" + err)
+                    // console.log("il y a eu une erreur \n" + err)
                 }
                 stream.on('close', function (code, signal) {
-                    console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
+                    // console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
                     conn.end();
                 }).on('data', function (data) {
-                    console.log("STD" + data);
+                    // console.log("STD" + data);
                     conn.end();
                     typeof callback === 'function' && callback(data);
                 }).stderr.on('data', function (data) {
-                    console.log('STDERR: ' + data);
+                    // console.log('STDERR: ' + data);
                 });
             });
         }).connect({
@@ -37,7 +37,7 @@ function sendCommand(command, callback){
             timeout: 1000 * 1000
         });
     } catch (err){
-        console.log(err);
+        // console.log(err);
     }
 };
 
