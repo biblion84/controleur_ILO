@@ -111,6 +111,7 @@ io.on("connection", function (socket) {
                                     // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
                                 })
                             } catch (ex){
+                                extinctionOk = false;
                                 console.log("il y a eu une erreur " + ex.message);
                             }
                         }
