@@ -4,7 +4,7 @@
 const CONF = require("./config.json");
 const Client = require('ssh2').Client;
 
-//TODO Il faut faire une sorte de spoolerSSH d'impression ou les commandes sont place les une apres les autres.
+//TODOok Il faut faire une sorte de spoolerSSH d'impression ou les commandes sont place les une apres les autres.
 // Pour eviter les doublons de commandes.
 function sendCommand(command, callback){
     let conn = new Client();
@@ -34,7 +34,7 @@ function sendCommand(command, callback){
                 hmac: ['hmac-sha1'],
                 cipher: ['aes128-cbc']
             },
-            timeout: 1000 * 1000
+            timeout: 100000 * 1000
         });
     } catch (err){
         // console.log(err);
