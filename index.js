@@ -102,10 +102,18 @@ io.on("connection", function (socket) {
                 setTimeout(() => {
                     if (!statusServeur.extinctionAutomatiqueBloque) {
                         // console.log("extinction du serveur a " + new Date() + temps + "minutes");
-                        spoolerSSH.addCommand("power off", () => {
-                            statusServeur.set("extinctionAutomatiqueBloque", false, eventEmitter);
-                                // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
-                        })
+                        let extinctionOk = false;
+                        while (!extinctionOk){
+                            try {
+                                spoolerSSH.addCommand("power off", () => {
+                                    statusServeur.set("extinctionAutomatiqueBloque", false, eventEmitter);
+                                    extinctionOk = true;
+                                    // statusServeur.extinctionAutomatiqueBloque = false; // On debloque l'extinction automatique du srv
+                                })
+                            } catch (ex){
+                                console.log("il y a eu une erreur " + ex.message);
+                            }
+                        }
                     }
                 }, commande.temps * 1000 * 60 + 1000);
 
