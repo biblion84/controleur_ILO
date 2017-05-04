@@ -23,7 +23,7 @@ eventEmitter.setMaxListeners(20); // For test purpose only, it currently support
 server.listen(CONF.controleur.port);
 
 
-//TODO Revoir cette fonction pour la rendre obsolete avec le TODO de statusServeur.js
+//TODOok Revoir cette fonction pour la rendre obsolete avec le TODO de statusServeur.js
 function refreshServeurStatus() {
     if (statusServeur.connected) {
         spoolerSSH.addCommand("power", function (data) {
@@ -85,7 +85,7 @@ io.on("connection", function (socket) {
         socket.emit("time", "Il est " + new Date())
     }, 1000);
 
-//TODO Eliminer socket.on shutdown etc et tout remplacer par le spoolerSSH command ? // Enfait c'etait une mauvaise idee, le spooler n'a rien a voir avec les commandes cote client
+//TODOok Eliminer socket.on shutdown etc et tout remplacer par le spoolerSSH command ? // Enfait c'etait une mauvaise idee, le spooler n'a rien a voir avec les commandes cote client
     //POUR : simplification enorme du code
     //CONTRE : chaque commande a ses conditions propres ex pour eteindre le srv il doit etre allume
     //MAIS : Si on fait un spoolerSSH c'est pas grave si on envois des commandes qui servent a rien.

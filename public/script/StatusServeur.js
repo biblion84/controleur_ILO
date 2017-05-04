@@ -1,7 +1,7 @@
 /**
  * Created by lucas on 16-Apr-17.
  */
-//TODO Il faut faire en sorte que chaque modification d'un attribut du serveur envois une maj au client.
+//TODOok Il faut faire en sorte que chaque modification d'un attribut du serveur envois une maj au client.
 class StatusServeur{
     constructor(isIloUp = false, minuteConnection = 0, extinctionAutomatiqueBloque = false, maxMinuteSrv = 15, connected = 1) {
         if(isIloUp.isInstanceOfStatusServeur){
