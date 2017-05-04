@@ -48,8 +48,8 @@ function controlerExtinction(serveurAllume) {
         statusServeur.set("minuteConnection", 0, eventEmitter);
     }
     if (statusServeur.minuteConnection >= statusServeur.maxMinuteSrv && !statusServeur.extinctionAutomatiqueBloque) {
-        spoolerSSH.addCommand("power off", () => {
-            spoolerSSH.addCommand("power off"); // On l'eteint 2 fois pck le serveur est tarpin con
+        spoolerSSH.addCommand("power off", (data) => {
+            console.log("Extinction du serveur le : " + new Date()  + " " + data);
         });
     }
 }
