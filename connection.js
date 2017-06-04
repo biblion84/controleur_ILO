@@ -10,6 +10,7 @@ function sendCommand(command, callback){
     let conn = new Client();
         conn.on('ready', function () {
             conn.exec(command, function (err, stream) {
+                console.log("err" + err + " -- stream " + stream);
                 if (err) {
                     conn.end();
                     return;
