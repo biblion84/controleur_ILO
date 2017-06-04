@@ -8,10 +8,11 @@ const Client = require('ssh2').Client;
 // Pour eviter les doublons de commandes.
 function sendCommand(command, callback){
     let conn = new Client();
-    try {
         conn.on('ready', function () {
             conn.exec(command, function (err, stream) {
                 if (err) {
+                    conn.end();
+                    return;
                     // console.log("il y a eu une erreur \n" + err)
                 }
                 stream.on('close', function (code, signal) {
@@ -25,6 +26,8 @@ function sendCommand(command, callback){
                     // console.log('STDERR: ' + data);
                 });
             });
+        }).on('error', function(err) {
+            conn.end();
         }).connect({
             host: CONF.ilo.host,
             port: 22,
@@ -36,9 +39,6 @@ function sendCommand(command, callback){
             },
             readyTimeout : 10000 * 1000
         });
-    } catch (err){
-        // console.log(err);
-    }
 };
 
 module.exports.sendCommand = sendCommand;
