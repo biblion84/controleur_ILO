@@ -36,7 +36,9 @@ function sendCommand(command, callback){
             password: CONF.ilo.pass,
             algorithms: {
                 hmac: ['hmac-sha1'],
-                cipher: ['aes128-cbc']
+                cipher: ['aes128-cbc'],
+                serverHostKey : ['ssh-rsa']
+
             },
             readyTimeout : 10000 * 1000
         });
